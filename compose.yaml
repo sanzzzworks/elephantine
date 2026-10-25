@@ -1,0 +1,21 @@
+
+services:
+  flutter-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: elephantine-flutter
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - flutter_pub_cache:/root/.pub-cache
+    ports:
+      - "8080:8080"
+    command: >
+      bash -c "flutter pub get &&
+      flutter run -d web-server
+      --web-hostname 0.0.0.0
+      --web-port 8080"
+
+volumes:
+  flutter_pub_cache:
